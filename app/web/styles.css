@@ -144,6 +144,68 @@ textarea {
   gap: 12px;
 }
 
+.lookup {
+  margin-top: 20px;
+  padding: 16px;
+  background: #fffdf9;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  gap: 10px;
+}
+
+.lookup-head {
+  display: grid;
+  gap: 2px;
+}
+
+.lookup-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.lookup-field {
+  gap: 8px;
+}
+
+.lookup-label {
+  color: var(--accent);
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.lookup-row {
+  display: grid;
+  gap: 8px;
+}
+
+.lookup-row input {
+  min-width: 0;
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+
+.lookup-submit {
+  justify-self: start;
+  padding: 10px 16px;
+}
+
+.lookup .hint {
+  line-height: 1.45;
+}
+
+.lookup code {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink);
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
 .key-row {
   display: flex;
   gap: 8px;

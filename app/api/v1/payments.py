@@ -14,13 +14,38 @@ router = APIRouter(
 )
 
 
-@router.post("", status_code=status.HTTP_202_ACCEPTED, response_model=PaymentAccepted)
+@router.post(
+    "",
+    status_code=status.HTTP_202_ACCEPTED,
+    response_model=PaymentAccepted,
+    description=(
+        "Рабочие значения заголовков на этом стенде:\n\n"
+        "- **X-API-Key:** `dev-api-key`\n"
+        "- **Idempotency-Key:** любая непустая строка, например `order-1001`. "
+        "Повтор с тем же ключом возвращает уже созданный платёж."
+    ),
+)
 async def create_payment_endpoint(
     body: PaymentCreate,
     session: SessionDep,
     idempotency_key: Annotated[
         str,
-        Header(alias="Idempotency-Key", min_length=1, max_length=255),
+        Header(
+            alias="Idempotency-Key",
+            min_length=1,
+            max_length=255,
+            description=(
+                "Ключ идемпотентности. Пример, с которым запрос принимается: `order-1001`. "
+                "Повтор с тем же ключом и тем же телом возвращает тот же платёж."
+            ),
+            examples=["order-1001"],
+            openapi_examples={
+                "order": {
+                    "summary": "Ключ заказа",
+                    "value": "order-1001",
+                }
+            },
+        ),
     ],
 ) -> PaymentAccepted:
     key = idempotency_key.strip()

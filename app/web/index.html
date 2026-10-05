@@ -78,13 +78,26 @@
         <div id="card" class="empty">Создайте платёж или найдите его по идентификатору.</div>
 
         <form id="lookup-form" class="lookup">
-          <label>
-            Найти по payment_id
-            <span class="key-row">
-              <input id="lookup-id" placeholder="uuid" />
-              <button class="ghost" type="submit">Открыть</button>
+          <div class="lookup-head">
+            <p class="eyebrow">Поиск</p>
+            <p class="lookup-title">Карточка по payment_id</p>
+          </div>
+          <label class="lookup-field">
+            <span class="lookup-label">payment_id</span>
+            <span class="lookup-row">
+              <input
+                id="lookup-id"
+                spellcheck="false"
+                autocomplete="off"
+                placeholder="35787dd9-73ca-428b-851b-8a43b0d4f857"
+              />
+              <button class="primary lookup-submit" type="submit">Найти</button>
             </span>
           </label>
+          <p class="hint">
+            Пример
+            <code>35787dd9-73ca-428b-851b-8a43b0d4f857</code>
+          </p>
           <p class="error" id="lookup-error" hidden></p>
         </form>
 
