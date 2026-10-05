@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Процессинг платежей</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <p class="eyebrow">Асинхронный сервис</p>
+        <h1>Процессинг платежей</h1>
+      </div>
+      <a class="docs" href="/docs">Документация API</a>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Новый платёж</h2>
+        <form id="payment-form">
+          <div class="grid">
+            <label>
+              Сумма
+              <input id="amount" name="amount" inputmode="decimal" value="100.50" required />
+            </label>
+            <label>
+              Валюта
+              <select id="currency" name="currency">
+                <option value="RUB" selected>RUB</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Описание
+            <input id="description" name="description" value="Оплата заказа" maxlength="1000" required />
+          </label>
+
+          <label>
+            Метаданные, JSON
+            <textarea id="metadata" name="metadata" rows="3">{
+  "order_id": "1001"
+}</textarea>
+          </label>
+
+          <label>
+            Webhook URL
+            <input id="webhook" name="webhook_url" type="url" value="https://httpbin.org/post" required />
+          </label>
+          <p class="hint">Адрес должен быть доступен из контейнера consumer. Обработка занимает 2–5 секунд.</p>
+
+          <label>
+            Idempotency-Key
+            <span class="key-row">
+              <input id="idempotency" name="idempotency" required />
+              <button class="ghost" id="new-key" type="button">Новый ключ</button>
+            </span>
+          </label>
+
+          <details>
+            <summary>Ключ API</summary>
+            <label>
+              X-API-Key
+              <input id="api-key" name="api_key" value="dev-api-key" autocomplete="off" required />
+            </label>
+          </details>
+
+          <button class="primary" id="submit" type="submit">Создать платёж</button>
+          <p class="error" id="form-error" hidden></p>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Карточка</h2>
+        <div id="card" class="empty">Создайте платёж или найдите его по идентификатору.</div>
+
+        <form id="lookup-form" class="lookup">
+          <label>
+            Найти по payment_id
+            <span class="key-row">
+              <input id="lookup-id" placeholder="uuid" />
+              <button class="ghost" type="submit">Открыть</button>
+            </span>
+          </label>
+          <p class="error" id="lookup-error" hidden></p>
+        </form>
+
+        <h3>В этой сессии</h3>
+        <ul id="history" class="history"></ul>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
