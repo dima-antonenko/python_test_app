@@ -27,6 +27,18 @@ FastAPI, Pydantic v2, SQLAlchemy 2.0 (async), PostgreSQL, RabbitMQ, FastStream, 
 
 Webhook: до 3 POST, паузы после неудач 1 с, 2 с и 4 с. Если все три не удались, срабатывает retry брокера.
 
+## Деплой
+
+Скрипт `scripts/deploy.sh` копирует каталог на сервер через `rsync` и запускает `docker compose` с `docker-compose.prod.yml`. Снаружи открыт только API (`:8000`). Postgres и RabbitMQ на сервере слушают `127.0.0.1`.
+
+```bash
+cp deploy.env.example deploy.env
+# укажите хост; пароль — только если нет SSH-ключа
+./scripts/deploy.sh
+```
+
+Нужны `ssh`, `rsync` и, при входе по паролю, `sshpass`. На сервере заранее установлены Docker и плагин Compose.
+
 ## Запуск
 
 ```bash
